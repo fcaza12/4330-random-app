@@ -55,6 +55,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  Color _currentColor = Colors.blue;
 
   void _incrementCounter() {
     setState(() {
@@ -65,6 +66,17 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  void _changeColor() {
+    setState(() {
+      _currentColor = _currentColor == Colors.blue ? Colors.purple : Colors.blue;
+    });
+  }
+
+  void _buttonWasPressed(){
+    _incrementCounter();
+    _changeColor();
   }
 
   @override
@@ -104,7 +116,26 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: .center,
           children: [
-            const Text('You have pushed the button this many times:'),
+
+            AnimatedContainer(
+              duration: const Duration(seconds: 1), // Transition time
+              curve: Curves.easeInOut, // Smooth easing curve
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                color: _currentColor,
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+
+            const Icon(
+              Icons.sports_soccer,
+              size: 64, // Adjust size as needed
+              color: Colors.black, // Adjust color to match theme
+            ),
+
+            const SizedBox(height: 16), // Adds spacing between icon and text
+            const Text('You have pushed the button this many times:', style: TextStyle(fontSize: 23)),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
@@ -113,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _buttonWasPressed,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
