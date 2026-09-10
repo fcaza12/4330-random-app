@@ -21,9 +21,9 @@ jobs:
 
     # IF YOUR FLUTTER APP IS IN A SUBFOLDER (e.g., "frontend" or "app"):
     # Uncomment the defaults block below and change 'your_app_folder' to your folder name.
-    # defaults:
-    #   run:
-    #     working-directory: ./your_app_folder
+    defaults:
+       run:
+         working-directory: ./testtest
 
     steps:
       - name: 📂 Checkout code
